@@ -24,13 +24,13 @@ public class Main {
         System.out.println(hangmanGame);
 
         var option = -1;
-        while(true){
+        while (true) {
             System.out.println("Selecione uma das opções:");
             System.out.println("1 - Informar uma letra");
             System.out.println("2 - Verificar status do jogo");
             System.out.println("3 - Sair do jogo");
             option = scanner.nextInt();
-            switch (option){
+            switch (option) {
                 case 1 -> inputCharacter(hangmanGame);
                 case 2 -> showGameStatus(hangmanGame);
                 case 3 -> System.exit(0);
@@ -47,9 +47,9 @@ public class Main {
     private static void inputCharacter(HangmanGame hangmanGame) {
         System.out.println("Informe uma letra");
         var character = scanner.next().charAt(0);
-        try{
+        try {
             hangmanGame.inputCharacter(character);
-        } catch (LetterAlreadyInputtedException ex){
+        } catch (LetterAlreadyInputtedException ex) {
             System.out.println(ex.getMessage());
         } catch (GameIsFinishedException ex) {
             System.out.println(ex.getMessage());

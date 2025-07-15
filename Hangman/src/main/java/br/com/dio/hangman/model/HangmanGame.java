@@ -16,6 +16,7 @@ public class HangmanGame {
 
     private final int lineSize;
     private final int hangmanInitialSize;
+
     private final List<HangmanChar> hangmanPaths;
     private final List<HangmanChar> characters;
     private final List<Character> failAttempts = new ArrayList<>();
@@ -39,7 +40,7 @@ public class HangmanGame {
     }
 
     public void inputCharacter(final char character) {
-        if(this.hangmanGameStatus != PENDING) {
+        if (this.hangmanGameStatus != PENDING) {
             var message = this.hangmanGameStatus == WIN ?
                     "Parabéns você ganhou!" :
                     "Você perdeu, tente outra vez";
@@ -49,25 +50,25 @@ public class HangmanGame {
         var found = this.characters.stream().filter(c -> c.getCharacter() == character).toList();
 
         if (this.failAttempts.contains(character)) {
-            throw new LetterAlreadyInputtedException("A letra '"+ character + "' já foi informada anteriormente");
+            throw new LetterAlreadyInputtedException("A letra '" + character + "' já foi informada anteriormente");
 
         }
 
         if (found.isEmpty()) {
             failAttempts.add(character);
-            if(failAttempts.size() >= 6) {
+            if (failAttempts.size() >= 6) {
                 this.hangmanGameStatus = LOSE;
             }
             rebuildHangman(this.hangmanPaths.removeFirst());
-            return ;
+            return;
         }
 
-        if(found.getFirst().isVisible()){
-            throw new LetterAlreadyInputtedException("A letra '"+ character + "' já foi informada anteriormente");
+        if (found.getFirst().isVisible()) {
+            throw new LetterAlreadyInputtedException("A letra '" + character + "' já foi informada anteriormente");
         }
 
         this.characters.forEach(c -> {
-            if(c.getCharacter() == found.getFirst().getCharacter()) {
+            if (c.getCharacter() == found.getFirst().getCharacter()) {
                 c.enableVisibility();
             }
         });
@@ -82,7 +83,7 @@ public class HangmanGame {
         return this.hangman;
     }
 
-    private List<HangmanChar> buildHangmanPathsPositions(){
+    private List<HangmanChar> buildHangmanPathsPositions() {
         final var HEAD_LINE = 3;
         final var BODY_LINE = 4;
         final var LEGS_LINE = 5;
@@ -98,7 +99,7 @@ public class HangmanGame {
         );
     }
 
-    private List<HangmanChar> setCharacterSpacePositionInGame(final List<HangmanChar> character, final int whiteSpacesAmount){
+    private List<HangmanChar> setCharacterSpacePositionInGame(final List<HangmanChar> character, final int whiteSpacesAmount) {
         final var LINE_LETTER = 6;
         for (int i = 0; i < character.size(); i++) {
             character.get(i).setPosition(this.lineSize * LINE_LETTER + HANGMAN_INITIAL_LINE_LENGTH + i);
@@ -107,7 +108,7 @@ public class HangmanGame {
     }
 
     private void rebuildHangman(final HangmanChar... hangmanChars) {
-        var hangmanBuilder = new  StringBuilder(this.hangman);
+        var hangmanBuilder = new StringBuilder(this.hangman);
         Stream.of(hangmanChars).forEach(h -> hangmanBuilder.setCharAt(h.getPosition(), h.getCharacter()));
         var failMessage = this.failAttempts.isEmpty() ? "" : "Tentativas" + this.failAttempts;
         this.hangman = hangmanBuilder.substring(0, hangmanInitialSize) + failMessage;
@@ -115,13 +116,13 @@ public class HangmanGame {
 
     private void buildHangmanDesign(final String whiteSpaces, final String characterSpace) {
         this.hangman = "  -----  " + whiteSpaces + System.lineSeparator() +
-                       "  |   |  " + whiteSpaces + System.lineSeparator() +
-                       "  |   |  " + whiteSpaces + System.lineSeparator() +
-                       "  |      " + whiteSpaces + System.lineSeparator() +
-                       "  |      " + whiteSpaces + System.lineSeparator() +
-                       "  |      " + whiteSpaces + System.lineSeparator() +
-                       "  |      " + whiteSpaces + System.lineSeparator() +
-                       "=========" + characterSpace + System.lineSeparator();
+                "  |   |  " + whiteSpaces + System.lineSeparator() +
+                "  |   |  " + whiteSpaces + System.lineSeparator() +
+                "  |      " + whiteSpaces + System.lineSeparator() +
+                "  |      " + whiteSpaces + System.lineSeparator() +
+                "  |      " + whiteSpaces + System.lineSeparator() +
+                "  |      " + whiteSpaces + System.lineSeparator() +
+                "=========" + characterSpace + System.lineSeparator();
 
     }
 }
