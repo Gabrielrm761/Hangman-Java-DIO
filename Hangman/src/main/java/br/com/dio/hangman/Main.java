@@ -4,6 +4,7 @@ import br.com.dio.hangman.exception.GameIsFinishedException;
 import br.com.dio.hangman.exception.LetterAlreadyInputtedException;
 import br.com.dio.hangman.model.HangmanChar;
 import br.com.dio.hangman.model.HangmanGame;
+import br.com.dio.hangman.model.WordBank;
 
 import java.util.Scanner;
 import java.util.stream.Stream;
@@ -13,12 +14,12 @@ public class Main {
     private final static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        var characters = Stream.of(args)
+        String secretWord = WordBank.getRandomWord();
+        var characters = Stream.of(secretWord.split(""))
                 .map(a -> a.toLowerCase().charAt(0))
                 .map(HangmanChar::new).toList();
         System.out.println(characters);
         var hangmanGame = new HangmanGame(characters);
-        System.out.println(new HangmanGame(characters));
         System.out.println("Bem vindo ao jogo da forca, tente adivinhar a palavra, boa sorte");
         System.out.println(hangmanGame);
 

@@ -88,12 +88,12 @@ public class HangmanGame {
         final var LEGS_LINE = 5;
         return new ArrayList<>(
                 List.of(
-                        new HangmanChar('0', this.lineSize * HEAD_LINE + 6),
-                        new HangmanChar('|', this.lineSize * BODY_LINE + 6),
-                        new HangmanChar('/', this.lineSize * BODY_LINE + 5),
-                        new HangmanChar('\\', this.lineSize * BODY_LINE + 7),
-                        new HangmanChar('/', this.lineSize * LEGS_LINE + 5),
-                        new HangmanChar('\\', this.lineSize * LEGS_LINE + 7)
+                        new HangmanChar('0', this.lineSize * HEAD_LINE + 9),
+                        new HangmanChar('|', this.lineSize * BODY_LINE + 10),
+                        new HangmanChar('/', this.lineSize * BODY_LINE + 9),
+                        new HangmanChar('\\', this.lineSize * BODY_LINE + 11),
+                        new HangmanChar('/', this.lineSize * LEGS_LINE + 10),
+                        new HangmanChar('\\', this.lineSize * LEGS_LINE + 12)
                 )
         );
     }
@@ -117,10 +117,10 @@ public class HangmanGame {
         this.hangman = "  -----  " + whiteSpaces + System.lineSeparator() +
                        "  |   |  " + whiteSpaces + System.lineSeparator() +
                        "  |   |  " + whiteSpaces + System.lineSeparator() +
-                       "  |   |  " + whiteSpaces + System.lineSeparator() +
-                       "  |   |  " + whiteSpaces + System.lineSeparator() +
-                       "  |   |  " + whiteSpaces + System.lineSeparator() +
-                       "  |   |  " + whiteSpaces + System.lineSeparator() +
+                       "  |      " + whiteSpaces + System.lineSeparator() +
+                       "  |      " + whiteSpaces + System.lineSeparator() +
+                       "  |      " + whiteSpaces + System.lineSeparator() +
+                       "  |      " + whiteSpaces + System.lineSeparator() +
                        "=========" + characterSpace + System.lineSeparator();
 
     }
